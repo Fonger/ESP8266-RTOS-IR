@@ -1,8 +1,4 @@
-PROGRAM = raw_dumper
+PROJECT_NAME := raw_dumper
 
-EXTRA_COMPONENTS = $(abspath ../..)
-
-include $(SDK_PATH)/common.mk
-
-monitor:
-	$(FILTEROUTPUT) --port $(ESPPORT) --baud 115200 --elf $(PROGRAM_OUT)
+EXTRA_COMPONENT_DIRS = ../.. 
+include $(IDF_PATH)/make/project.mk

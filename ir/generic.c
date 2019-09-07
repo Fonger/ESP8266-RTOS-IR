@@ -3,11 +3,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <ir/tx.h>
-#include <ir/rx.h>
-#include <ir/generic.h>
-#include <ir/debug.h>
-
+#include "tx.h"
+#include "rx.h"
+#include "generic.h"
+#include "debug.h"
 
 typedef enum {
     ir_state_idle,

@@ -1,15 +1,13 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <esp/uart.h>
-#include <FreeRTOS.h>
-#include <task.h>
 
-#include <ir/ir.h>
-#include <ir/raw.h>
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+
+#include "rx.h"
+#include "raw.h"
 
 
 #define IR_RX_GPIO 12
-
 
 void ir_dump_task(void *arg) {
     ir_rx_init(IR_RX_GPIO, 1024);
@@ -33,10 +31,7 @@ void ir_dump_task(void *arg) {
             printf("\n");
     }
 }
-
-
-void user_init(void) {
-    uart_set_baud(0, 115200);
-
+void app_main()
+{
     xTaskCreate(ir_dump_task, "IR dump", 2048, NULL, tskIDLE_PRIORITY, NULL);
 }

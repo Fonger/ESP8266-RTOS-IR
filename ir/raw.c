@@ -3,8 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <ir/tx.h>
-#include <ir/rx.h>
+#include <tx.h>
+#include <rx.h>
 
 
 typedef struct {

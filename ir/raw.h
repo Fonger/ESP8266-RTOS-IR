@@ -1,6 +1,6 @@
 #pragma once
 
-#include <ir/rx.h>
+#include "rx.h"
 
 // API to send raw commands
 //

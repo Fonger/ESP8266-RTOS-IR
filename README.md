@@ -1,15 +1,17 @@
-esp-ir
+ESP8266-RTOS-IR
 ======
 
-Library for [ESP-OPEN-RTOS](https://github.com/SuperHouse/esp-open-rtos) to send and receive IR commands.
+Infrared rx/tx library for [espressif/ESP8266_RTOS_SDK](https://github.com/espressif/ESP8266_RTOS_SDK) (v3.2+, esp-idf style) to send and receive IR commands.
+
+This library is forked from [maximkulkin/esp-ir](https://github.com/maximkulkin/esp-ir) which works with [esp-open-rtos](https://github.com/SuperHouse/esp-open-rtos) instead of the official espressif SDK.
 
 Receiving IR codes can be done on arbitrary pin (which supports GPIO mode and pin change interrupts),
-transmission though can only be done on GPIO14.
+transmission though can only be done on GPIO14 because this library use i2s WS pin to send accurate 38KHz IR signals with 50% duty cycle in non-blocking mode.
 
 Example sending command:
 ```c
-#include <ir/ir.h>
-#include <ir/raw.h>
+#include "ir.h"
+#include "raw.h"
 
 static int16_t[] command1 = {
   3291, -1611,
@@ -29,8 +31,8 @@ ir_raw_send(command1, sizeof(command1) / sizeof(*command1));
 
 Example receiving NEC-like command:
 ```c
-#include "ir/ir.h"
-#include "ir/generic.h"
+#include "ir.h"
+#include "generic.h"
 
 #define IR_RX_GPIO 12
 
@@ -77,4 +79,4 @@ while (1) {
 License
 =======
 
-MIT licensed. See the bundled [LICENSE](https://github.com/maximkulkin/esp-ir-i2s/blob/master/LICENSE) file for more details.
+MIT licensed. See the bundled [LICENSE](https://github.com/Fonger/ESP8266-RTOS-IR/blob/master/LICENSE) file for more details.
