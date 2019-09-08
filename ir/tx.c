@@ -11,7 +11,7 @@
 #include "esp8266/i2s_register.h"
 #include "esp8266/i2s_struct.h"
 #include "esp8266/timer_struct.h"
-
+#include "esp8266/gpio_struct.h"
 #include "esp_system.h"
 
 #include "tx.h"
@@ -35,14 +35,15 @@ void rom_i2c_writeReg_Mask(uint8_t block, uint8_t host_id,
 EventGroupHandle_t tx_flags;
 #define TX_FLAG_READY (1 << 0)
 
-static inline void gen_carrier() {
+/* sometimes compiler refuses to inline, use IRAM_ATTR to ensure performance */
+static void inline IRAM_ATTR gen_carrier() {
     PIN_FUNC_SELECT(PERIPHS_IO_MUX_MTMS_U, FUNC_I2SI_WS);
     I2S0.conf.rx_start = 1;
 }
 
-static inline void clr_carrier() {
+static void inline IRAM_ATTR clr_carrier() {
     PIN_FUNC_SELECT(PERIPHS_IO_MUX_MTMS_U, FUNC_GPIO14);
-    gpio_set_level(IR_GPIO_NUM, 0);
+    GPIO.out_w1tc |= (0x1 << IR_GPIO_NUM); // equivalent to gpio_set_level(IR_GPIO_NUM, 0);
     I2S0.conf.rx_start = 0;
 }
 

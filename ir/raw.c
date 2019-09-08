@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "esp_attr.h"
+
 #include <tx.h>
 #include <rx.h>
 
@@ -16,7 +18,7 @@ typedef struct {
 } ir_raw_encoder_t;
 
 
-static int16_t ir_raw_get_next_pulse(ir_raw_encoder_t *encoder) {
+static int16_t IRAM_ATTR ir_raw_get_next_pulse(ir_raw_encoder_t *encoder) {
     if (encoder->pos >= encoder->count)
         return 0;
 
