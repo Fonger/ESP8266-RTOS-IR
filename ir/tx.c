@@ -35,20 +35,38 @@ void rom_i2c_writeReg_Mask(uint8_t block, uint8_t host_id,
 EventGroupHandle_t tx_flags;
 #define TX_FLAG_READY (1 << 0)
 
-/* sometimes compiler refuses to inline, use IRAM_ATTR to ensure performance */
-static void inline IRAM_ATTR gen_carrier() {
+#define ALWAYS_INLINE __attribute__((always_inline))
+
+static void ALWAYS_INLINE gen_carrier() {
     PIN_FUNC_SELECT(PERIPHS_IO_MUX_MTMS_U, FUNC_I2SI_WS);
     I2S0.conf.rx_start = 1;
 }
 
-static void inline IRAM_ATTR clr_carrier() {
+
+static void ALWAYS_INLINE clr_carrier() {
     PIN_FUNC_SELECT(PERIPHS_IO_MUX_MTMS_U, FUNC_GPIO14);
     GPIO.out_w1tc |= (0x1 << IR_GPIO_NUM); // equivalent to gpio_set_level(IR_GPIO_NUM, 0);
     I2S0.conf.rx_start = 0;
 }
 
 
+static void ALWAYS_INLINE hw_timer_pause() {
+    frc1.ctrl.en = 0;
+}
+
+
+static void ALWAYS_INLINE hw_timer_arm(uint32_t us) {
+    // equivalent to hw_timer_alarm_us() with less overhead
+    frc1.ctrl.reload = 0;
+    frc1.ctrl.div = TIMER_CLKDIV_16;
+    frc1.ctrl.intr_type = TIMER_EDGE_INT;
+    frc1.load.data = ((TIMER_BASE_CLK >> frc1.ctrl.div) / 1000000) * us;
+    frc1.ctrl.en = 1;
+}
+
+
 static void IRAM_ATTR ir_tx_timer_handler(ir_encoder_t *encoder) {
+    hw_timer_pause();
     int16_t pulse = encoder->get_next_pulse(encoder);
     if (pulse == 0) {
         // Done with transmission
@@ -68,7 +86,7 @@ static void IRAM_ATTR ir_tx_timer_handler(ir_encoder_t *encoder) {
     } else {
         clr_carrier();
     }
-    hw_timer_alarm_us(abs(pulse), false);
+    hw_timer_arm(abs(pulse));
 }
 
 
