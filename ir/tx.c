@@ -35,7 +35,7 @@ void rom_i2c_writeReg_Mask(uint8_t block, uint8_t host_id,
 EventGroupHandle_t tx_flags;
 #define TX_FLAG_READY (1 << 0)
 
-#define ALWAYS_INLINE __attribute__((always_inline))
+#define ALWAYS_INLINE __attribute__((always_inline)) inline
 
 static void ALWAYS_INLINE gen_carrier() {
     PIN_FUNC_SELECT(PERIPHS_IO_MUX_MTMS_U, FUNC_I2SI_WS);
