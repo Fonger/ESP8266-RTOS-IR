@@ -1,14 +1,30 @@
-ESP8266-RTOS-IR
-======
+# ESP8266-RTOS-IR
 
 Infrared rx/tx library for [espressif/ESP8266_RTOS_SDK](https://github.com/espressif/ESP8266_RTOS_SDK) (v3.2+, esp-idf style) to send and receive IR commands.
 
-This library is forked from [maximkulkin/esp-ir](https://github.com/maximkulkin/esp-ir) which works with [esp-open-rtos](https://github.com/SuperHouse/esp-open-rtos) instead of the official espressif SDK.
-
 Receiving IR codes can be done on arbitrary pin (which supports GPIO mode and pin change interrupts),
-transmission though can only be done on GPIO14 because this library use i2s WS pin to send accurate 38KHz IR signals with 50% duty cycle in non-blocking mode.
+**transmission though can only be done on `GPIO14`**.
+
+This library use i2s WS pin to send accurate 38KHz IR signals with 50% duty cycle without blocking CPU like other libraries do.
+
+## Compatibility
+
+You should use ESP8266_RTOS_SDK branch `release/v3.2`. The master branch currently has [software timer bug #693](https://github.com/espressif/ESP8266_RTOS_SDK/issues/693).
+
+## Installation
+
+Because of [this issue #663](https://github.com/espressif/ESP8266_RTOS_SDK/issues/663) you should add the following line to `$IDF_PATH/components/freertos/port/esp8266/include/freertos/FreeRTOSConfig.h` manually.
+
+```c
+#define INCLUDE_xTimerPendFunctionCall  1
+```
+
+Then you can clone this project inside your components folder.
+
+## Usage
 
 Example sending command:
+
 ```c
 #include "ir.h"
 #include "raw.h"
@@ -30,6 +46,7 @@ ir_raw_send(command1, sizeof(command1) / sizeof(*command1));
 ```
 
 Example receiving NEC-like command:
+
 ```c
 #include "ir.h"
 #include "generic.h"
@@ -76,7 +93,8 @@ while (1) {
 }
 ```
 
-License
-=======
+## License
 
 MIT licensed. See the bundled [LICENSE](https://github.com/Fonger/ESP8266-RTOS-IR/blob/master/LICENSE) file for more details.
+
+This library is based on [maximkulkin/esp-ir](https://github.com/maximkulkin/esp-ir) which works with [esp-open-rtos](https://github.com/SuperHouse/esp-open-rtos) instead of the official espressif SDK.
