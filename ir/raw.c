@@ -3,10 +3,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "esp_attr.h"
+#include <esp_attr.h>
 
-#include <tx.h>
-#include <rx.h>
+#include <ir/tx.h>
+#include <ir/rx.h>
 
 
 typedef struct {

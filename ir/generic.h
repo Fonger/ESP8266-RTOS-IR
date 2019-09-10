@@ -1,7 +1,7 @@
 #pragma once
 
 #include <stdint.h>
-#include "rx.h"
+#include <ir/rx.h>
 
 
 // NEC protocol decoder

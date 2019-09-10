@@ -26,8 +26,8 @@ Then you can clone this project inside your components folder.
 Example sending command:
 
 ```c
-#include "ir.h"
-#include "raw.h"
+#include <ir/ir.h>
+#include <ir/raw.h>
 
 static int16_t[] command1 = {
   3291, -1611,
@@ -48,8 +48,8 @@ ir_raw_send(command1, sizeof(command1) / sizeof(*command1));
 Example receiving NEC-like command:
 
 ```c
-#include "ir.h"
-#include "generic.h"
+#include <ir/ir.h>
+#include <ir/generic.h>
 
 #define IR_RX_GPIO 12
 

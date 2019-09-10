@@ -1,16 +1,16 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
-#include "freertos/queue.h"
-#include "freertos/event_groups.h"
-#include "driver/i2s.h"
-#include "driver/gpio.h"
-#include "esp_timer.h"
+#include <freertos/FreeRTOS.h>
+#include <freertos/task.h>
+#include <freertos/queue.h>
+#include <freertos/event_groups.h>
+#include <driver/i2s.h>
+#include <driver/gpio.h>
+#include <esp_timer.h>
 
-#include "rx.h"
-#include "debug.h"
+#include <ir/rx.h>
+#include <ir/debug.h>
 
 typedef enum {
     ir_rx_state_idle,

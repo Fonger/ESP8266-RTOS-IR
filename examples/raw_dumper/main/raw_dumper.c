@@ -1,10 +1,10 @@
 #include <stdio.h>
 
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
+#include <freertos/FreeRTOS.h>
+#include <freertos/task.h>
 
-#include "rx.h"
-#include "raw.h"
+#include <ir/rx.h>
+#include <ir/raw.h>
 
 
 #define IR_RX_GPIO 12

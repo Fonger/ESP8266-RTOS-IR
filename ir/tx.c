@@ -1,20 +1,20 @@
 #include <stdio.h>
 #include <math.h>
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
-#include "freertos/event_groups.h"
-#include "driver/i2s.h"
-#include "driver/gpio.h"
-#include "driver/hw_timer.h"
+#include <freertos/FreeRTOS.h>
+#include <freertos/task.h>
+#include <freertos/event_groups.h>
+#include <driver/i2s.h>
+#include <driver/gpio.h>
+#include <driver/hw_timer.h>
 
-#include "esp8266/pin_mux_register.h"
-#include "esp8266/i2s_register.h"
-#include "esp8266/i2s_struct.h"
-#include "esp8266/timer_struct.h"
-#include "esp8266/gpio_struct.h"
-#include "esp_system.h"
+#include <esp8266/pin_mux_register.h>
+#include <esp8266/i2s_register.h>
+#include <esp8266/i2s_struct.h>
+#include <esp8266/timer_struct.h>
+#include <esp8266/gpio_struct.h>
+#include <esp_system.h>
 
-#include "tx.h"
+#include <ir/tx.h>
 
 // The following definitions is taken from ESP8266_MP3_DECODER demo
 // https://github.com/espressif/ESP8266_RTOS_SDK/blob/master/components/esp8266/driver/i2s.c
