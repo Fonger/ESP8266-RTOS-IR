@@ -7,9 +7,11 @@ Receiving IR codes can be done on arbitrary pin (which supports GPIO mode and pi
 
 This library use i2s WS pin to send accurate 38KHz IR signals with 50% duty cycle without blocking CPU like other libraries do.
 
+Recently, espressif has released official IR feature (`driver/ir-rx.h` `driver/ir-tx.h`) in master branch but this library is more lightweight.
+
 ## Compatibility
 
-You should use ESP8266_RTOS_SDK branch `release/v3.2`. The master branch currently has [software timer bug #693](https://github.com/espressif/ESP8266_RTOS_SDK/issues/693).
+ESP8266_RTOS_SDK v3.2+
 
 ## Installation
 
