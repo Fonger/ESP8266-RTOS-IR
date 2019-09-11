@@ -2,6 +2,10 @@
 
 #include <stdint.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 
 typedef struct ir_encoder ir_encoder_t;
 
@@ -35,3 +39,8 @@ void ir_tx_init();
 // Returns:
 //   0 on success; negative value - error code
 int ir_tx_send(ir_encoder_t *encoder);
+
+
+#ifdef __cplusplus
+}
+#endif

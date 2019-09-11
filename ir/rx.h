@@ -2,6 +2,11 @@
 
 #include <stdint.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
 typedef struct ir_decoder ir_decoder_t;
 
 // Decode function: takes decoder and pulses and if decoding is successful should
@@ -62,3 +67,8 @@ void ir_rx_set_excess(int16_t excess);
 //   receive_buffer_size - size of receive buffer (interpretation is up to decoder
 //     implementation)
 int ir_recv(ir_decoder_t *decoder, uint32_t timeout, void *receive_buffer, uint16_t receive_buffer_size);
+
+
+#ifdef __cplusplus
+}
+#endif

@@ -4,6 +4,11 @@
 #include <ir/rx.h>
 
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
 // NEC protocol decoder
 //
 // NEC protocol command consists of
@@ -46,3 +51,8 @@ typedef struct {
 //   0 on success; negative value - error code
 int ir_generic_send(ir_generic_config_t *config, uint8_t *data, uint16_t data_size);
 ir_decoder_t *ir_generic_make_decoder(ir_generic_config_t *config);
+
+
+#ifdef __cplusplus
+}
+#endif
